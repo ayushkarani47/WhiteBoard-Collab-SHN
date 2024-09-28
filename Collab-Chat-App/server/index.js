@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
+    io.in(data.room).emit("receive_message", data);
   });
 
   socket.on("disconnect", async () => {
@@ -75,7 +75,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_canvas_data", (data) => {
     updateMostRecentCanvasData(data.room, data.canvas);
-    socket.to(data.room).emit("receive_canvas_data", data.canvas);
+    io.in(data.room).emit("receive_canvas_data", data.canvas);
   });
 });
 
